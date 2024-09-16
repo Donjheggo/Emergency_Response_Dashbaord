@@ -74,8 +74,7 @@ export async function UpdateEmergency(
 }
 
 export async function DeleteEmergency(
-  id: string,
-  status: string
+  id: string
 ): Promise<{ error?: string; success?: boolean }> {
   const { error } = await supabase
     .from("emergency")
