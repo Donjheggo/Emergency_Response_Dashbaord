@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/client";
 import { notFound, redirect } from "next/navigation";
 
@@ -28,9 +29,7 @@ export async function GetEmergencyReports(
 
   // Apply search filter if there is a search query
   if (searchQuery) {
-    query = query.or(
-      `description.ilike.%${searchQuery}%,user!inner(email.ilike.%${searchQuery}%)`
-    );
+    query = query.or(`description.ilike.%${searchQuery}%`);
   }
 
   const { data, error } = await query;
@@ -56,3 +55,20 @@ export async function GetEmergencyById(id: string) {
   return data;
 }
 
+export async function UpdateEmergency(
+  id: string,
+  status: string
+): Promise<{ error?: string; success?: boolean }> {
+  const { error } = await supabase
+    .from("emergency")
+    .update({ status: status })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/dashboard/reports");
+  return { success: true };
+}
