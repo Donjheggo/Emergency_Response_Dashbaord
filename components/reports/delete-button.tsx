@@ -1,0 +1,29 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { TrashIcon } from "lucide-react";
+import { DeleteEmergency } from "@/lib/actions/reports";
+import { toast } from "react-toastify";
+
+export default function DeleteButton({ id }: { id: string }) {
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    try {
+      const { error } = await DeleteEmergency(id);
+      if (error) {
+        toast.error(`Error: ${error}`);
+      }
+    } catch (error) {
+      toast.error(`Error: ${error}`);
+    }
+  };
+
+  return (
+    <div onClick={handleDelete} className="cursor-pointer w-full p-1">
+      <span className="flex items-center gap-2 text-base text-red-500">
+        <TrashIcon width={20} /> Delete
+      </span>
+    </div>
+  );
+}

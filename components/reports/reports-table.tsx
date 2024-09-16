@@ -34,6 +34,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { TablePagination } from "./report-pagination";
 import UpdateButton from "./update-button";
+import DeleteButton from "./delete-button";
 
 export function ReportsTable({
   searchQuery,
@@ -124,13 +125,12 @@ export function ReportsTable({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
+                      <DropdownMenuItem className="p-0">
                         <UpdateButton id={item.id} />
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem>
-                        {/* <DeleteButton id={product.id} /> */}
-                        Delete Button
+                      <DropdownMenuItem className="p-0">
+                        <DeleteButton id={item.id} />
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

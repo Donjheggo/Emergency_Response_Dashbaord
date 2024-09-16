@@ -72,3 +72,21 @@ export async function UpdateEmergency(
   revalidatePath("/dashboard/reports");
   return { success: true };
 }
+
+export async function DeleteEmergency(
+  id: string,
+  status: string
+): Promise<{ error?: string; success?: boolean }> {
+  const { error } = await supabase
+    .from("emergency")
+    .delete()
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/dashboard/reports");
+  return { success: true };
+}
