@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/client";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 const supabase = createClient();
 
-export async function TotalEmergencyReports() {
-  const { data, error } = await supabase.from("emergency").select("*");
+export async function TotalResponders() {
+  const { data, error } = await supabase.from("responder").select("*");
 
   if (error) {
     return 0;
@@ -16,14 +16,14 @@ export async function TotalEmergencyReports() {
   return data.length;
 }
 
-export async function GetEmergencyReports(
+export async function GetResponders(
   searchQuery: string,
   page: number,
   items_per_page: number
 ) {
   let query = supabase
-    .from("emergency")
-    .select(`*, responder ( type ), user ( email )`)
+    .from("responder")
+    .select("*")
     .order("created_at", { ascending: false })
     .range((page - 1) * items_per_page, page * items_per_page - 1); // Add pagination
 
@@ -41,10 +41,10 @@ export async function GetEmergencyReports(
   return data;
 }
 
-export async function GetEmergencyById(id: string) {
+export async function GetResponderById(id: string) {
   const { data, error } = await supabase
-    .from("emergency")
-    .select(`*, responder ( type ), user ( email )`)
+    .from("responder")
+    .select("*")
     .eq("id", id)
     .single();
 
@@ -55,51 +55,67 @@ export async function GetEmergencyById(id: string) {
   return data;
 }
 
-export async function ReadEmergency(
-  id: string
+export type ResponderT = {
+  id?: string;
+  type: string;
+  mobile_number: string;
+  status: boolean;
+};
+export async function CreateResponder(
+  form: ResponderT
 ): Promise<{ error?: string; success?: boolean }> {
   const { error } = await supabase
-    .from("emergency")
-    .update({ isRead: true })
-    .eq("id", id)
+    .from("responder")
+    .insert([
+      {
+        type: form.type,
+        mobile_number: form.mobile_number,
+        status: form.status,
+      },
+    ])
     .select();
 
   if (error) {
     return { error: error.message };
   }
 
-  // No need because realtime subscription is added
-  // revalidatePath("/dashboard/reports");
+  console.log(form);
+
+  revalidatePath("/dashboard/responders");
   return { success: true };
 }
 
-export async function UpdateEmergency(
+export async function UpdateResponder(
   id: string,
-  status: string
+  form: ResponderT
 ): Promise<{ error?: string; success?: boolean }> {
   const { error } = await supabase
-    .from("emergency")
-    .update({ status: status })
+    .from("responder")
+    .update({
+      type: form.type,
+      mobile_number: form.mobile_number,
+      status: form.status,
+    })
     .eq("id", id)
     .select();
 
   if (error) {
     return { error: error.message };
   }
-  // No need because realtime subscription is added
-  // revalidatePath("/dashboard/reports");
+
+  revalidatePath("/dashboard/responders");
   return { success: true };
 }
 
-export async function DeleteEmergency(
+export async function DeleteResponder(
   id: string
 ): Promise<{ error?: string; success?: boolean }> {
-  const { error } = await supabase.from("emergency").delete().eq("id", id);
+  const { error } = await supabase.from("responder").delete().eq("id", id);
 
   if (error) {
     return { error: error.message };
   }
-  // No need because realtime subscription is added
-  // revalidatePath("/dashboard/reports");
+
+  revalidatePath("/dashboard/responders");
   return { success: true };
 }

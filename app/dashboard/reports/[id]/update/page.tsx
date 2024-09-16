@@ -1,8 +1,7 @@
 import { GetEmergencyById } from "@/lib/actions/reports";
 import { notFound } from "next/navigation";
 import UpdateReportForm from "@/components/reports/update-report-form";
-import Link from "next/link";
-import { MoveLeft } from "lucide-react";
+import BackButton from "@/components/back-button";
 
 export default async function UpdateReport({
   params,
@@ -15,10 +14,7 @@ export default async function UpdateReport({
 
   return (
     <>
-      <Link href="../" className="flex items-center gap-1 hover:font-semibold">
-        <MoveLeft />
-        Back
-      </Link>
+      <BackButton href="../"/>
       <div className="flex justify-center">
         <UpdateReportForm report={serializedReport} />
       </div>
