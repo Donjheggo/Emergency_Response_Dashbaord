@@ -80,8 +80,6 @@ export function ReportsTable({
     };
   }, [searchQuery, page, items_per_page]);
 
-  console.log(reports);
-
   return (
     <Card x-chunk="dashboard-06-chunk-0">
       <CardHeader>
@@ -96,8 +94,8 @@ export function ReportsTable({
             <TableRow>
               <TableHead>User</TableHead>
               <TableHead>Responder</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="hidden md:table-cell">Created at</TableHead>
+              <TableHead>Responding Status</TableHead>
+              <TableHead className="hidden md:table-cell">Reading Status</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -106,7 +104,10 @@ export function ReportsTable({
           <TableBody>
             {reports.map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="font-medium">{item.user.email}</TableCell>
+                <TableCell>
+                  <p className="font-medium">{item.user.email}</p>
+                  <p> {new Date(item.created_at).toDateString()}</p>
+                </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {item.responder.type}
                 </TableCell>
@@ -114,7 +115,7 @@ export function ReportsTable({
                   <Badge variant="outline">{item.status.toUpperCase()}</Badge>
                 </TableCell>
                 <TableCell className="table-cell">
-                  {new Date(item.created_at).toDateString()}
+                  {item.isRead ? "Read" : "Unread"}
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
