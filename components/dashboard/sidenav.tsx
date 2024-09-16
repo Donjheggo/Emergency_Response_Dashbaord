@@ -10,11 +10,13 @@ import {
   PencilLine,
   User,
   NotebookPen,
-  Ambulance
+  Ambulance,
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
+import logo from "@/app/adaptive-icon.png";
 
 export default function Sidenav() {
   const supabase = createClient();
@@ -22,7 +24,7 @@ export default function Sidenav() {
 
   const handleSignout = async () => {
     await supabase.auth.signOut();
-    router.push("/auth/sign-in")
+    router.push("/auth/sign-in");
   };
 
   return (
@@ -33,7 +35,7 @@ export default function Sidenav() {
             href="/dashboard"
             className="flex items-center gap-2 font-semibold"
           >
-            <Package2 className="h-6 w-6" />
+            <Image src={logo} alt="logo" width={25} height={25} />
             <span>Emergency Response</span>
           </Link>
         </div>

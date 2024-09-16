@@ -16,6 +16,18 @@ export async function TotalEmergencyReports() {
   return data.length;
 }
 
+export async function TotalUnreadEmergencyReports() {
+  const { data, error } = await supabase
+    .from("emergency")
+    .select("*")
+    .eq("isRead", false);
+
+  if (error) {
+    return 0;
+  }
+  return data.length;
+}
+
 export async function GetEmergencyReports(
   searchQuery: string,
   page: number,

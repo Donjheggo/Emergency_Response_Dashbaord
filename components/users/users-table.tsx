@@ -45,7 +45,7 @@ export async function UsersTable({
   const totalPages = totalUsers / items_per_page;
 
   return (
-    <Card x-chunk="dashboard-06-chunk-0">
+    <Card>
       <CardHeader>
         <CardTitle>Users</CardTitle>
         <CardDescription>Manage users.</CardDescription>
