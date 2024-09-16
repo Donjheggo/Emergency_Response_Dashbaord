@@ -34,12 +34,9 @@ export default function UpdateReportForm({ report }: { report: any }) {
       const { error } = await UpdateEmergency(report.id, selectedStatus);
       if (error) {
         toast.error(`Error: ${error}`);
-        setLoading(false);
-      } else {
-        toast.success("Success");
-        router.push("/dashboard/reports");
-        setLoading(false);
       }
+      toast.success("Success");
+      router.push("/dashboard/reports");
     } catch (error) {
       toast.error(`Error: ${error}`);
     } finally {
