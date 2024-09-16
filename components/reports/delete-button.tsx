@@ -1,12 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { TrashIcon } from "lucide-react";
 import { DeleteEmergency } from "@/lib/actions/reports";
 import { toast } from "react-toastify";
 
 export default function DeleteButton({ id }: { id: string }) {
-  const router = useRouter();
 
   const handleDelete = async () => {
     try {
@@ -14,6 +12,7 @@ export default function DeleteButton({ id }: { id: string }) {
       if (error) {
         toast.error(`Error: ${error}`);
       }
+      toast.success("Success")
     } catch (error) {
       toast.error(`Error: ${error}`);
     }
