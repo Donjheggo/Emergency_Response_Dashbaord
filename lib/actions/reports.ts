@@ -55,6 +55,23 @@ export async function GetEmergencyById(id: string) {
   return data;
 }
 
+export async function ReadEmergency(
+  id: string
+): Promise<{ error?: string; success?: boolean }> {
+  const { error } = await supabase
+    .from("emergency")
+    .update({ isRead: true })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/dashboard/reports");
+  return { success: true };
+}
+
 export async function UpdateEmergency(
   id: string,
   status: string

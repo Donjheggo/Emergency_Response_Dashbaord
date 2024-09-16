@@ -12,10 +12,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { UpdateEmergency } from "@/lib/actions/reports";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { ReadEmergency } from "@/lib/actions/reports";
 
 const status = ["pending", "responded", "declined"];
 
@@ -23,6 +24,14 @@ export default function UpdateReportForm({ report }: { report: any }) {
   const [selectedStatus, setSelectedStatus] = useState(report.status);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const OpenEmergcy = async () => {
+      ReadEmergency(report.id);
+    };
+
+    OpenEmergcy();
+  }, []);
 
   const handleChangeStatus = (value: string) => {
     setSelectedStatus(value);
