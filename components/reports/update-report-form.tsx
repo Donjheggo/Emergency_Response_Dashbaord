@@ -31,7 +31,7 @@ export default function UpdateReportForm({ report }: { report: any }) {
     };
 
     OpenEmergcy();
-  }, []);
+  }, [report.id]);
 
   const handleChangeStatus = (value: string) => {
     setSelectedStatus(value);

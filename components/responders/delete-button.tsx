@@ -3,7 +3,6 @@
 import { TrashIcon } from "lucide-react";
 import { DeleteResponder } from "@/lib/actions/responders";
 import { toast } from "react-toastify";
-import { revalidatePath } from "next/cache";
 
 export default function DeleteButton({ id }: { id: string }) {
   const handleDelete = async () => {

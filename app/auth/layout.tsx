@@ -1,5 +1,4 @@
 import Image from "next/image";
-import placeholder from "@/app/placeholder.svg";
 import authImg from "@/app/auth-img.jpg"
 
 export default function AuthLayout({

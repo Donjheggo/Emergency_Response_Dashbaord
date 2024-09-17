@@ -1,14 +1,10 @@
 "use client";
 
-import { Package2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import {
   LogOut,
   LayoutDashboard,
-  CalendarDays,
   UsersRound,
-  PencilLine,
-  User,
   NotebookPen,
   Ambulance,
 } from "lucide-react";

@@ -1,8 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/client";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 const supabase = createClient();
 
