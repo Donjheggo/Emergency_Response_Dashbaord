@@ -76,7 +76,7 @@ export default function ReportsTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {reports.map((item, index) => (
+            {reports?.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <p className="font-medium">{item.user.email}</p>

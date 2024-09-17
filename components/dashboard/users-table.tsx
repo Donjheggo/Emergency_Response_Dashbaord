@@ -48,7 +48,7 @@ export default async function UsersTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((item, index) => (
+            {users?.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <p className="font-medium">{item.email}</p>

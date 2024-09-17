@@ -1,5 +1,6 @@
 import Image from "next/image";
 import placeholder from "@/app/placeholder.svg";
+import authImg from "@/app/auth-img.jpg"
 
 export default function AuthLayout({
   children,
@@ -11,7 +12,7 @@ export default function AuthLayout({
       <div className="flex items-center justify-center py-12">{children}</div>
       <div className="hidden bg-muted lg:block">
         <Image
-          src={placeholder}
+          src={authImg}
           alt="Image"
           width="1920"
           height="1080"
