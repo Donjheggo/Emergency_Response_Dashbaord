@@ -35,6 +35,7 @@ import { createClient } from "@/lib/supabase/client";
 import { TablePagination } from "./report-pagination";
 import UpdateButton from "./update-button";
 import DeleteButton from "./delete-button";
+import { type ReportsT } from "../dashboard/reports-table";
 
 export function ReportsTable({
   searchQuery,
@@ -46,7 +47,7 @@ export function ReportsTable({
   items_per_page: number;
 }) {
   const supabase = createClient();
-  const [reports, setReports] = useState<any[]>([]);
+  const [reports, setReports] = useState<ReportsT[]>([]);
   const [totalReports, setTotalReports] = useState<number>(0);
   const totalPages = totalReports / items_per_page;
 
@@ -78,7 +79,7 @@ export function ReportsTable({
     return () => {
       subscription.unsubscribe();
     };
-  }, [searchQuery, page, items_per_page]);
+  }, [searchQuery, page, items_per_page, supabase]);
 
   return (
     <Card x-chunk="dashboard-06-chunk-0">

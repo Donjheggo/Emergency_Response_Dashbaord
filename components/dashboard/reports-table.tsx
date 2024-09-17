@@ -16,10 +16,11 @@ import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ExternalLink } from "lucide-react";
+import { Tables } from "@/lib/supabase/types";
 
 export default function ReportsTable() {
   const supabase = createClient();
-  const [reports, setReports] = useState<any[]>([]);
+  const [reports, setReports] = useState<ReportsT[]>([]);
 
   useEffect(() => {
     const fetchReports = async () => {
@@ -45,7 +46,7 @@ export default function ReportsTable() {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [supabase]);
 
   return (
     <Card x-chunk="dashboard-06-chunk-0">
@@ -99,3 +100,15 @@ export default function ReportsTable() {
     </Card>
   );
 }
+
+type ResponderT = Tables<"responder">;
+export type ReportsT = {
+  id: string;
+  description: string;
+  created_at: Date;
+  address: string;
+  responder: ResponderT;
+  user: { email: string };
+  isRead: boolean;
+  status: "pending" | "responded" | "declined";
+};

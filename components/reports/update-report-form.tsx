@@ -17,10 +17,11 @@ import { toast } from "react-toastify";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReadEmergency } from "@/lib/actions/reports";
+import { ReportsT } from "../dashboard/reports-table";
 
 const status = ["pending", "responded", "declined"];
 
-export default function UpdateReportForm({ report }: { report: any }) {
+export default function UpdateReportForm({ report }: { report: ReportsT }) {
   const [selectedStatus, setSelectedStatus] = useState(report.status);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
@@ -34,7 +35,7 @@ export default function UpdateReportForm({ report }: { report: any }) {
   }, [report.id]);
 
   const handleChangeStatus = (value: string) => {
-    setSelectedStatus(value);
+    setSelectedStatus(value as "pending" | "responded" | "declined");
   };
 
   const handleSubmit = async () => {
