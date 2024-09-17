@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 const supabase = createClient();
 
 export async function TotalUsers() {
-  const { data, error } = await supabase.from("responder").select("*");
+  const { data, error } = await supabase.from("user").select("*");
 
   if (error) {
     return 0;

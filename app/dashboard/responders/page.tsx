@@ -14,7 +14,7 @@ export default function Responders({
 }) {
   const searchQuery = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
-  const items_per_page = 5;
+  const items_per_page = 7;
   return (
     <>
       <div className="hidden md:block">

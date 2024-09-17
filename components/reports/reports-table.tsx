@@ -146,7 +146,7 @@ export function ReportsTable({
         <div className="text-xs text-muted-foreground">
           Showing <strong>{(page - 1) * items_per_page + 1}</strong>-
           <strong>{Math.min(page * items_per_page, totalReports)}</strong> of{" "}
-          <strong>{totalReports}</strong> products
+          <strong>{totalReports}</strong> emergency reports
         </div>
         <div className="ml-auto">
           <TablePagination totalPages={totalPages} />

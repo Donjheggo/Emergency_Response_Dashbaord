@@ -102,7 +102,7 @@ export async function UsersTable({
         <div className="text-xs text-muted-foreground">
           Showing <strong>{(page - 1) * items_per_page + 1}</strong>-
           <strong>{Math.min(page * items_per_page, totalUsers)}</strong> of{" "}
-          <strong>{totalUsers}</strong> products
+          <strong>{totalUsers}</strong> users
         </div>
         <div className="ml-auto">
           <TablePagination totalPages={totalPages} />
