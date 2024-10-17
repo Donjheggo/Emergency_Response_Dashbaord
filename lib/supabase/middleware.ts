@@ -1,5 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -45,18 +47,22 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
-  // creating a new response object with NextResponse.next() make sure to:
-  // 1. Pass the request in it, like so:
-  //    const myNewResponse = NextResponse.next({ request })
-  // 2. Copy over the cookies, like so:
-  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
-  // 3. Change the myNewResponse object to fit your needs, but avoid changing
-  //    the cookies!
-  // 4. Finally:
-  //    return myNewResponse
-  // If this is not done, you may be causing the browser and server to go out
-  // of sync and terminate the user's session prematurely!
+  // Routes Authorization Filter by User Role
+  if (user) {
+    const { data: userData } = await supabase
+      .from("user")
+      .select("*")
+      .eq("id", user.id)
+      .single();
+
+    const isAdmin = userData.role === "ADMIN";
+    if (!isAdmin) {
+      // If the user is not an admin, sign them out
+      await supabase.auth.signOut(); // Sign out the user
+      revalidatePath("/");
+      redirect("/"); // Optionally, redirect to home page or another page
+    }
+  }
 
   return supabaseResponse;
 }
