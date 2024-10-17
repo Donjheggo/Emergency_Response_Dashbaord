@@ -14,7 +14,7 @@ export default async function UpdateReport({
 
   return (
     <>
-      <BackButton href="../"/>
+      <BackButton href="../" />
       <div className="flex justify-center">
         <UpdateReportForm report={serializedReport} />
       </div>

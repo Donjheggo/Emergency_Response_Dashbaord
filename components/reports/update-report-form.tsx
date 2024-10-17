@@ -18,6 +18,7 @@ import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReadEmergency } from "@/lib/actions/reports";
 import { ReportsT } from "../dashboard/reports-table";
+import Image from "next/image";
 
 const status = ["pending", "responded", "declined"];
 
@@ -57,9 +58,29 @@ export default function UpdateReportForm({ report }: { report: ReportsT }) {
   return (
     <form>
       <Card className="w-[350px] md:w-[650px] shadow-none">
+        <div className="grid md:grid-cols-2 gap-4 p-4">
+          <Image
+            alt="Product image"
+            className="aspect-square object-cover w-full rounded-xl"
+            height="300"
+            src={report.image}
+            width="300"
+          />
+          <div className="w-full h-[300px]">
+            <iframe
+              className="rounded-xl w-full h-full"
+              src={`https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${report.address}&t=&z=16&ie=UTF8&iwloc=B&output=embed`}
+              title="Emergency Location"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
         <CardHeader>
-          <CardTitle>{report.user.email}</CardTitle>
+          <CardTitle>
+            {report.name} <br />{" "}
+          </CardTitle>
           <CardDescription>
+            {report.user.email} <br />
             {new Date(report.created_at).toDateString()}
           </CardDescription>
         </CardHeader>
@@ -69,10 +90,8 @@ export default function UpdateReportForm({ report }: { report: ReportsT }) {
             <span className="font-semibold"> {report.responder.type}</span>
             <br />
             Description - {report.description} <br />
-            Address - {report.address} <br />
-            Status -
           </p>
-
+          <p>Status -</p>
           <RadioGroup
             name="status"
             defaultValue={selectedStatus}

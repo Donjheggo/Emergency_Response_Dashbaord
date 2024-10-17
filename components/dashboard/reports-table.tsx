@@ -17,6 +17,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { ExternalLink } from "lucide-react";
 import { Tables } from "@/lib/supabase/types";
+import Image from "next/image";
 
 export default function ReportsTable() {
   const supabase = createClient();
@@ -65,12 +66,13 @@ export default function ReportsTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>User</TableHead>
-              <TableHead>Responder</TableHead>
-              <TableHead>Responding Status</TableHead>
-              <TableHead className="hidden md:table-cell">
-                Reading Status
+              <TableHead className="hidden w-[100px] sm:table-cell">
+                <span className="sr-only">Image</span>
               </TableHead>
+              <TableHead>Full name</TableHead>
+              <TableHead>Responder</TableHead>
+              <TableHead>Status</TableHead>
+
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -79,18 +81,23 @@ export default function ReportsTable() {
           <TableBody>
             {reports?.map((item, index) => (
               <TableRow key={index}>
-                <TableCell>
-                  <p className="font-medium">{item.user.email}</p>
-                  <p> {new Date(item.created_at).toDateString()}</p>
+                <TableCell className="hidden sm:table-cell">
+                  <Image
+                    alt="Product image"
+                    className="aspect-square rounded-md object-cover"
+                    height="64"
+                    src={item.image}
+                    width="64"
+                  />
+                </TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {item.name}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {item.responder.type}
                 </TableCell>
                 <TableCell>
                   <Badge variant="outline">{item.status.toUpperCase()}</Badge>
-                </TableCell>
-                <TableCell className="table-cell">
-                  {item.isRead ? "Read" : "Unread"}
                 </TableCell>
               </TableRow>
             ))}
@@ -103,6 +110,8 @@ export default function ReportsTable() {
 
 type ResponderT = Tables<"responder">;
 export type ReportsT = {
+  name: string;
+  image: string;
   id: string;
   description: string;
   created_at: Date;

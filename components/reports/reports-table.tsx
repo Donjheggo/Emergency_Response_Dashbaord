@@ -36,6 +36,7 @@ import { TablePagination } from "./report-pagination";
 import UpdateButton from "./update-button";
 import DeleteButton from "./delete-button";
 import { type ReportsT } from "../dashboard/reports-table";
+import Image from "next/image";
 
 export function ReportsTable({
   searchQuery,
@@ -93,10 +94,15 @@ export function ReportsTable({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>User</TableHead>
+              <TableHead className="hidden w-[100px] sm:table-cell">
+                <span className="sr-only">Image</span>
+              </TableHead>
+              <TableHead>User email</TableHead>
+              <TableHead>Full name</TableHead>
               <TableHead>Responder</TableHead>
-              <TableHead>Responding Status</TableHead>
-              <TableHead className="hidden md:table-cell">Reading Status</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Reading Status
+              </TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -105,18 +111,27 @@ export function ReportsTable({
           <TableBody>
             {reports.map((item, index) => (
               <TableRow key={index}>
+                <TableCell className="hidden sm:table-cell">
+                  <Image
+                    alt="Product image"
+                    className="aspect-square rounded-md object-cover"
+                    height="64"
+                    src={item.image}
+                    width="64"
+                  />
+                </TableCell>
                 <TableCell>
                   <p className="font-medium">{item.user.email}</p>
                   <p> {new Date(item.created_at).toDateString()}</p>
+                </TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {item.name}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {item.responder.type}
                 </TableCell>
                 <TableCell>
                   <Badge variant="outline">{item.status.toUpperCase()}</Badge>
-                </TableCell>
-                <TableCell className="table-cell">
-                  {item.isRead ? "Read" : "Unread"}
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
