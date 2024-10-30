@@ -1,6 +1,3 @@
-"use client";
-
-import { createClient } from "@/lib/supabase/client";
 import {
   LogOut,
   LayoutDashboard,
@@ -9,30 +6,21 @@ import {
   Ambulance,
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { signout } from "@/lib/actions/auth";
 import Link from "next/link";
-import logo from "@/app/adaptive-icon.png";
+import Image from "next/image";
+import favicon from "@/app/favicon.ico";
 
 export default function Sidenav() {
-  const supabase = createClient();
-  const router = useRouter();
-
-  const handleSignout = async () => {
-    await supabase.auth.signOut();
-    router.push("/auth/sign-in");
-  };
-
   return (
     <aside className="hidden border-r md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 py-5 lg:h-[60px] lg:px-6 ">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-2 font-semibold"
-          >
-            <Image src={logo} alt="logo" width={25} height={25} />
-            <span>Emergency Response</span>
+          <Link href="/" className="flex items-center gap-2 font-semibold">
+            <Image src={favicon} alt="logo" width={30} height={30} />
+            <span className="ml-2 text-lg font-semibold">
+              Stylish Furniture
+            </span>
           </Link>
         </div>
         <div className="flex-1">
@@ -41,7 +29,7 @@ export default function Sidenav() {
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
                 Admin
               </p>
-              {dashboardLinks.map((item, index) => (
+              {adminLinks.map((item, index) => (
                 <Link
                   href={item.href}
                   key={index}
@@ -52,7 +40,6 @@ export default function Sidenav() {
                 </Link>
               ))}
             </div>
-
             <div className="mt-2">
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
                 Settings
@@ -60,9 +47,8 @@ export default function Sidenav() {
               <div className="flex items-center gap-2">
                 <ThemeToggler>Theme</ThemeToggler>
               </div>
-              <form>
+              <form action={signout}>
                 <button
-                  onClick={handleSignout}
                   type="submit"
                   className="text-md flex items-center gap-2 hover:bg-muted rounded-md p-2 w-full"
                 >
@@ -78,25 +64,25 @@ export default function Sidenav() {
   );
 }
 
-export const dashboardLinks = [
+export const adminLinks = [
   {
     name: "Dashboard",
-    href: "/dashboard",
+    href: "/",
     icon: <LayoutDashboard />,
   },
   {
     name: "Emergency Reports",
-    href: "/dashboard/reports",
+    href: "/reports",
     icon: <NotebookPen />,
   },
   {
     name: "Responders",
-    href: "/dashboard/responders",
+    href: "/responders",
     icon: <Ambulance />,
   },
   {
     name: "Users",
-    href: "/dashboard/users",
+    href: "/users",
     icon: <UsersRound />,
   },
 ];

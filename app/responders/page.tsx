@@ -16,7 +16,7 @@ export default function Responders({
   const currentPage = Number(searchParams?.page) || 1;
   const items_per_page = 7;
   return (
-    <>
+    <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
       <div className="hidden md:block">
         <BreadCrumb items={breadcrumbItems} />
       </div>
@@ -28,6 +28,6 @@ export default function Responders({
         page={currentPage}
         items_per_page={items_per_page}
       />
-    </>
+    </div>
   );
 }

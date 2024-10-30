@@ -31,7 +31,7 @@ export function LoginForm() {
       }
 
       if (data?.session) {
-        router.push("/dashboard");
+        router.push("/");
       }
     } catch (error) {
       toast.error(`Error: ${error}`);

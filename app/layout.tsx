@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/themes/theme-provider";
 import { Bounce, ToastContainer } from "react-toastify";
+import { createClient } from "@/lib/supabase/server";
+import UserLayout from "@/components/layout/layout";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
@@ -17,15 +19,18 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Emergency Response - Dashboard",
-  description: "Emergency Response - Dashboardt",
+  title: "Emergency Response Admin",
+  description: "Emergency Response Dashboard Administration",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -37,7 +42,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          {data?.user ? <UserLayout>{children}</UserLayout> : children}
+
           <ToastContainer
             position="bottom-left"
             autoClose={5000}
