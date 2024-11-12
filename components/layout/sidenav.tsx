@@ -19,7 +19,7 @@ export default function Sidenav() {
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Image src={favicon} alt="logo" width={30} height={30} />
             <span className="ml-2 text-lg font-semibold">
-              Stylish Furniture
+              Emergency Response
             </span>
           </Link>
         </div>
