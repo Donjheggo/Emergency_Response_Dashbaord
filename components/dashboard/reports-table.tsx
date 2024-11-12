@@ -54,7 +54,7 @@ export default function ReportsTable() {
       <CardHeader>
         <CardTitle className="flex items-center">
           Emergency Reports
-          <Link href="/dashboard/reports" className="ml-auto">
+          <Link href="/reports" className="ml-auto">
             <Button className="flex items-center">
               <ExternalLink className="mr-2" />
               View All

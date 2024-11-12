@@ -26,7 +26,7 @@ export default async function UsersTable() {
       <CardHeader>
         <CardTitle className="flex items-center">
           Users
-          <Link href="/dashboard/users" className="ml-auto">
+          <Link href="/users" className="ml-auto">
             <Button className="flex items-center">
               <ExternalLink className="mr-2" />
               View All
