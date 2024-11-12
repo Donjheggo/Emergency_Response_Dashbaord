@@ -47,7 +47,7 @@ export default function UpdateReportForm({ report }: { report: ReportsT }) {
         toast.error(`Error: ${error}`);
       }
       toast.success("Success");
-      router.push("/dashboard/reports");
+      router.push("/reports");
     } catch (error) {
       toast.error(`Error: ${error}`);
     } finally {

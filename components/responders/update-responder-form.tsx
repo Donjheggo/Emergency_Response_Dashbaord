@@ -46,7 +46,7 @@ export default function UpdateResponderForm({
         toast.error(`Error: ${error}`);
       }
       toast.success("Success");
-      router.push("/dashboard/responders");
+      router.push("/responders");
     } catch (error) {
       toast.error(`Error: ${error}`);
     } finally {

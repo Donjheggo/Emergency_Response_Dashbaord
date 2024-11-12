@@ -39,7 +39,7 @@ export default function UpdateUserForm({ user }: { user: UserT }) {
         toast.error(`Error: ${error}`);
       }
       toast.success("Success");
-      router.push("/dashboard/users");
+      router.push("/users");
     } catch (error) {
       toast.error(`Error: ${error}`);
     } finally {
