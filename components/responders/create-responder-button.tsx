@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 
 export default function CreateResponderButton() {
   return (
-    <Link href="/dashboard/responders/create">
+    <Link href="/responders/create">
       <Button variant="default">
         <Plus className="mr-2"/>
         New Responder

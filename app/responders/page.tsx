@@ -4,7 +4,7 @@ import CreateResponderButton from "@/components/responders/create-responder-butt
 
 const breadcrumbItems = [
   { label: "Dashboard", href: "/dashboard" },
-  { label: "Responders", href: "/dashboard/responders", active: true },
+  { label: "Responders", href: "/responders", active: true },
 ];
 
 export default function Responders({
