@@ -99,6 +99,7 @@ export function ReportsTable({
               </TableHead>
               <TableHead>User email</TableHead>
               <TableHead>Full name</TableHead>
+              <TableHead>Contact number</TableHead>
               <TableHead>Responder</TableHead>
               <TableHead className="hidden md:table-cell">
                 Reading Status
@@ -126,6 +127,9 @@ export function ReportsTable({
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {item.name}
+                </TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {item.contact_number}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {item.responder.type}

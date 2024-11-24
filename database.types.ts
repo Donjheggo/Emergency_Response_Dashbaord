@@ -12,6 +12,7 @@ export type Database = {
       emergency: {
         Row: {
           address: string
+          contact_number: string | null
           created_at: string
           description: string | null
           id: string
@@ -24,6 +25,7 @@ export type Database = {
         }
         Insert: {
           address: string
+          contact_number?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -36,6 +38,7 @@ export type Database = {
         }
         Update: {
           address?: string
+          contact_number?: string | null
           created_at?: string
           description?: string | null
           id?: string
