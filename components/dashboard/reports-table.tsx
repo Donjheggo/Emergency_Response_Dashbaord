@@ -111,6 +111,7 @@ export default function ReportsTable() {
 type ResponderT = Tables<"responder">;
 export type ReportsT = {
   name: string;
+  contact_number: string;
   image: string;
   id: string;
   description: string;
