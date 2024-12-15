@@ -25,10 +25,12 @@ import { useRouter } from "next/navigation";
 import { UpdateUser, type UserT } from "@/lib/actions/users";
 
 export default function UpdateUserForm({ user }: { user: UserT }) {
+  console.log("User: ", user);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState<UserT>({
     role: user.role,
+    verified: user.verified,
   });
 
   const handleSubmit = async () => {
@@ -71,6 +73,25 @@ export default function UpdateUserForm({ user }: { user: UserT }) {
                 <SelectGroup>
                   <SelectItem value="USER">User</SelectItem>
                   <SelectItem value="ADMIN">Admin</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label>Verification Status</Label>
+            <Select
+              value={String(form.verified)}
+              onValueChange={(value) =>
+                setForm({ ...form, verified: Boolean(value) })
+              }
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select Availability" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="true">Verified</SelectItem>
+                  <SelectItem value="false">Not Verified</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

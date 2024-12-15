@@ -44,6 +44,7 @@ export async function GetUsers(
 export type UserT = {
   id?: string;
   email?: string;
+  verified: boolean;
   role: "USER" | "ADMIN";
 };
 
@@ -55,6 +56,7 @@ export async function UpdateUser(
     .from("user")
     .update({
       role: form.role,
+      verified: form.verified,
     })
     .eq("id", id)
     .select();

@@ -56,6 +56,7 @@ export async function UsersTable({
             <TableRow>
               <TableHead>Email</TableHead>
               <TableHead>Role</TableHead>
+              <TableHead>Verification</TableHead>
               <TableHead>Created At</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
@@ -70,6 +71,11 @@ export async function UsersTable({
                 </TableCell>
                 <TableCell>
                   <p className="font-medium">{item.role}</p>
+                </TableCell>
+                <TableCell>
+                  <p className="font-medium">
+                    {item.verified ? "Verified" : "Not Verified"}
+                  </p>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {new Date(item.created_at).toDateString()}

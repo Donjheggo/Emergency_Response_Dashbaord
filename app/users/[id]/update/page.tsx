@@ -13,11 +13,11 @@ export default async function UpdateUser({
   const serializedUser = JSON.parse(JSON.stringify(user));
 
   return (
-    <>
+    <div className="p-4">
       <BackButton href="../" />
       <div className="flex justify-center">
         <UpdateUserForm user={serializedUser} />
       </div>
-    </>
+    </div>
   );
 }
