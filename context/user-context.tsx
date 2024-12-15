@@ -32,7 +32,7 @@ export default function UserProvider({
 
       if (userAuthData) {
         const { data: userData, error } = await supabase
-          .from("users")
+          .from("user")
           .select("*")
           .eq("id", userAuthData.user?.id)
           .single();

@@ -2,6 +2,7 @@ import {
   LogOut,
   LayoutDashboard,
   UsersRound,
+  SquareUserRound,
   NotebookPen,
   Ambulance,
 } from "lucide-react";
@@ -84,5 +85,10 @@ export const adminLinks = [
     name: "Users",
     href: "/users",
     icon: <UsersRound />,
+  },
+  {
+    name: "Verification",
+    href: "/verification",
+    icon: <SquareUserRound />,
   },
 ];
